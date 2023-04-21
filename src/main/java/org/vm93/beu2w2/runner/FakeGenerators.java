@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
+import org.vm93.beu2w2.service.DeviceService;
 import org.vm93.beu2w2.service.EmployeeService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +15,9 @@ public class FakeGenerators implements ApplicationRunner {
 	
 	@Autowired
 	EmployeeService employeedao;
+	
+	@Autowired
+	DeviceService devicedao;
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
@@ -28,6 +32,10 @@ public class FakeGenerators implements ApplicationRunner {
 		
 		for (int i = 0; i < 10; i++) {
 		employeedao.saveFakeEmployee();
+		}
+		
+		for (int i = 0; i < 50; i++) {
+		devicedao.saveFakeDevice();
 		}
 		
 		log.warn("*** > FakeGeneratorEnded < ***");
