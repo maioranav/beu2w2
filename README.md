@@ -50,6 +50,24 @@ Restituisce la lista di tutti i device con lo stato specificato (`AVAILABLE`, `A
 
 Restituisce la lista di tutti i device con lo stato e il tipo specificati (`SMARTPHONE`, `TABLET`, `LAPTOP`).
 
+#### POST /api/device
+
+Crea un nuovo device.
+
+#### PUT /api/device/{id}
+
+Aggiorna le informazioni sul device specificato dall'ID. Accetta un oggetto JSON con i seguenti campi:
+
+- `status`: stringa (`AVAILABLE`, `ASSIGNED`, `MAINTENANCE`, `OUTOFORDER`)
+- `type`: stringa (`SMARTPHONE`, `TABLET`, `LAPTOP`)
+- `employee`: oggetto JSON che rappresenta l'employee assegnato al device (opzionale)
+
+Se lo stato è `ASSIGNED`, l'employee specificato verrà assegnato al device.
+
+#### DELETE /api/device/{id}
+
+Cancella il device specificato dall'ID.
+
 ### Employee
 
 #### GET /api/employee
@@ -59,6 +77,23 @@ Restituisce la lista di tutti gli employee.
 #### GET /api/employee/{username}
 
 Restituisce le informazioni sull'employee specificato dall'username.
+
+#### POST /api/employee
+
+Crea un nuovo employee.
+
+#### PUT /api/employee/{username}
+
+Aggiorna le informazioni sull'employee specificato dall'username. Accetta un oggetto JSON con i seguenti campi:
+
+- `username`: stringa
+- `firstname`: stringa
+- `lastname`: stringa
+- `email`: stringa
+
+#### DELETE /api/employee/{username}
+
+Cancella l'employee specificato dall'username. Funziona solo se l'employee non ha device assegnati.
 
 ## Autorizzazioni
 
