@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.vm93.beu2w2.model.Employee;
+import org.vm93.beu2w2.repo.DeviceDaoRepo;
 import org.vm93.beu2w2.repo.EmployeeDaoRepo;
 
 import jakarta.persistence.EntityExistsException;
@@ -16,6 +17,7 @@ import jakarta.persistence.EntityNotFoundException;
 public class EmployeeService {
 
 	@Autowired private EmployeeDaoRepo repo;
+	@Autowired private DeviceDaoRepo devicerepo;
 	
 	@Autowired @Qualifier("FakeEmployee") private ObjectProvider<Employee> fakeEmployeeProvider;
 	
@@ -35,6 +37,9 @@ public class EmployeeService {
 	public String removeEmployee(Long id) {
 		if (!repo.existsById(id)) {
 			throw new EntityNotFoundException("Employee ID doesnt exists!!");
+		}
+		if(devicerepo.findByEmployee(repo.findById(id).get()).size() > 0) {
+			throw new EntityExistsException("Employee has Assigned Devices. Please return before.");
 		}
 		repo.deleteById(id);
 		return "Employee Deleted from DB!";
