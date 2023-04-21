@@ -50,6 +50,7 @@ public class EmployeeService {
 			throw new EntityNotFoundException("Employee ID doesnt exists on No Id Specified!!");
 		}
 		repo.save(e);
+		e.setDevices(devicerepo.findByEmployee(e));
 		return e;
 	}
 	

@@ -21,6 +21,8 @@ import org.vm93.beu2w2.model.Employee;
 import org.vm93.beu2w2.service.DeviceService;
 import org.vm93.beu2w2.service.EmployeeService;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.EntityNotFoundException;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
