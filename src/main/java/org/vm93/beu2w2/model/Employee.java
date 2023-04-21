@@ -2,6 +2,8 @@ package org.vm93.beu2w2.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,6 +21,7 @@ import lombok.NoArgsConstructor;
 @Data @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({ "devices" })
 public class Employee {
 
 	@Id
