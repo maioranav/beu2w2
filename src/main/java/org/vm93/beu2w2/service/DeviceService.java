@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.vm93.beu2w2.model.Device;
+import org.vm93.beu2w2.model.DeviceStatus;
+import org.vm93.beu2w2.model.DeviceType;
 import org.vm93.beu2w2.repo.DeviceDaoRepo;
 import jakarta.persistence.EntityNotFoundException;
 
@@ -52,5 +54,17 @@ public class DeviceService {
 
 	public Page<Device> findAll(Pageable pageable){
 		return (Page<Device>) repo.findAll(pageable);
+	}
+	
+	public Page<Device> findByStatus(DeviceStatus status, Pageable pageable){
+		return (Page<Device>) repo.findByStatus(status, pageable);
+	}
+	
+	public Page<Device> findByType(DeviceType type, Pageable pageable){
+		return (Page<Device>) repo.findByType(type, pageable);
+	}
+	
+	public Page<Device> findByStatusAndType(DeviceStatus status, DeviceType type, Pageable pageable){
+		return (Page<Device>) repo.findByStatusAndType(status, type, pageable);
 	}
 }
