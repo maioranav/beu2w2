@@ -85,7 +85,14 @@ Cancella il device specificato dall'ID.
 
 #### GET /api/employee
 
-Restituisce la lista di tutti gli employee.
+Restituisce la lista di tutti gli employee in formato JSON con i seguenti campi:
+
+- `id`: Id dell'employee dal DB
+- `username`: stringa 
+- `firstname`: stringa
+- `lastname`: stringa
+- `email`: stringa
+- `devices`: Array di oggetti JSON delle entità devices.
 
 #### GET /api/employee/{id}
 
