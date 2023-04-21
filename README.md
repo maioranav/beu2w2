@@ -54,15 +54,28 @@ Restituisce la lista di tutti i device con lo stato e il tipo specificati (`SMAR
 
 Crea un nuovo device.
 
-#### PUT /api/device/{id}
+#### PUT /api/device/
 
 Aggiorna le informazioni sul device specificato dall'ID. Accetta un oggetto JSON con i seguenti campi:
 
+- `id`: id dell'oggetto nel database
 - `status`: stringa (`AVAILABLE`, `ASSIGNED`, `MAINTENANCE`, `OUTOFORDER`)
 - `type`: stringa (`SMARTPHONE`, `TABLET`, `LAPTOP`)
-- `employee`: oggetto JSON che rappresenta l'employee assegnato al device (opzionale)
+- `employee`: oggetto JSON che rappresenta l'employee assegnato al device (opzionale*)
 
-Se lo stato è `ASSIGNED`, l'employee specificato verrà assegnato al device.
+Se lo stato è `ASSIGNED`, l'employee specificato verrà assegnato al device (diventa necessario).
+
+#### PUT /api/device/{id}
+
+Associa il device specificato dall'ID ad un Employee. Accetta un oggetto JSON con i seguenti campi:
+
+- `id`: id dell'employee da associare
+- `username`: stringa (opzionale, recuperato dal DB)
+- `firstname`: stringa (opzionale, recuperato dal DB)
+- `lastname`: stringa (opzionale, recuperato dal DB)
+- `email`: stringa (opzionale, recuperato dal DB)
+
+L'employee deve esistere già sul DB altrimenti il software solleverà un'eccezione.
 
 #### DELETE /api/device/{id}
 
@@ -74,26 +87,32 @@ Cancella il device specificato dall'ID.
 
 Restituisce la lista di tutti gli employee.
 
-#### GET /api/employee/{username}
+#### GET /api/employee/{id}
 
-Restituisce le informazioni sull'employee specificato dall'username.
+Restituisce le informazioni sull'employee specificato dall'ID.
 
 #### POST /api/employee
 
-Crea un nuovo employee.
+Crea un nuovo employee. Accetta un oggetto JSON con i seguenti campi:
 
-#### PUT /api/employee/{username}
-
-Aggiorna le informazioni sull'employee specificato dall'username. Accetta un oggetto JSON con i seguenti campi:
-
-- `username`: stringa
+- `username`: stringa 
 - `firstname`: stringa
 - `lastname`: stringa
 - `email`: stringa
 
-#### DELETE /api/employee/{username}
+#### PUT /api/employee/
 
-Cancella l'employee specificato dall'username. Funziona solo se l'employee non ha device assegnati.
+Aggiorna le informazioni sull'employee specificato dall'username. Accetta un oggetto JSON con i seguenti campi:
+
+- `id`: ID dell'employee sul DB
+- `username`: stringa 
+- `firstname`: stringa
+- `lastname`: stringa
+- `email`: stringa
+
+#### DELETE /api/employee/{id}
+
+Cancella l'employee specificato dall'ID. Funziona solo se l'employee non ha device assegnati.
 
 ## Autorizzazioni
 
