@@ -7,7 +7,7 @@ SMARTPHONE, TABLET, LAPTOP;
 
 private static final Random rand = new Random();
 
-public static DeviceType randomDeviceStatus()  {
+public static DeviceType randomDeviceType()  {
 	DeviceType[] types = values();
     return types[rand.nextInt(types.length)];
 }
