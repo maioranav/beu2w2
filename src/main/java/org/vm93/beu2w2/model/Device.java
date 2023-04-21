@@ -1,5 +1,7 @@
 package org.vm93.beu2w2.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -31,6 +33,7 @@ public class Device {
 	private DeviceStatus status;
 	
 	@ManyToOne
+	@JsonIgnoreProperties({ "devices" })
 	private Employee employee;
 
 }

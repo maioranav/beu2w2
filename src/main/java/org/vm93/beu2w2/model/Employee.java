@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @Data @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIgnoreProperties({ "devices" })
+
 public class Employee {
 
 	@Id
@@ -41,5 +41,6 @@ public class Employee {
 	private String email;
 	
 	@OneToMany(mappedBy = "employee")
+	@JsonIgnoreProperties({ "employee" })
 	private List<Device> devices;
 }
