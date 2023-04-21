@@ -12,8 +12,8 @@ public class DeviceConfig {
 	
 	@Bean("CustomDevice")
 	@Scope("prototype")
-	public Device custDevice() {
-		return Device.builder().build();
+	public Device custDevice(DeviceType type, DeviceStatus status) {
+		return Device.builder().type(type).status(status).build();
 	}
 	
 	@Bean("FakeDevice")
