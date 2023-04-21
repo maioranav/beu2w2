@@ -40,7 +40,7 @@ public class DeviceController {
 		return new ResponseEntity<>(deviceService.findAll(pageable), HttpStatus.OK);
 	}
 	
-	@GetMapping(path = "/available")
+	@GetMapping(path = "/status/available")
 	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<?> getAvailableDevices(Pageable pageable){
 		return new ResponseEntity<>(deviceService.findByStatus(DeviceStatus.AVAILABLE, pageable), HttpStatus.OK);
@@ -52,13 +52,19 @@ public class DeviceController {
 		return new ResponseEntity<>(deviceService.findById(id), HttpStatus.OK);
 	}
 	
-	@GetMapping(path = "/available/{type}")
+	@GetMapping(path = "/status/{status}")
+	@PreAuthorize("isAuthenticated()")
+	public ResponseEntity<?> getStatusDevices(@PathVariable(name = "status") String status, Pageable pageable){
+		return new ResponseEntity<>(deviceService.findByStatus(DeviceStatus.valueOf(status.toUpperCase()), pageable), HttpStatus.OK);
+	}
+	
+	@GetMapping(path = "/status/available/{type}")
 	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<?> getAvailableDevicesType(@PathVariable(name = "type") String type, Pageable pageable){
 		return new ResponseEntity<>(deviceService.findByStatusAndType(DeviceStatus.AVAILABLE, DeviceType.valueOf(type.toUpperCase()), pageable), HttpStatus.OK);
 	}
 	
-	@GetMapping(path = "/{stat}/{type}")
+	@GetMapping(path = "/status/{stat}/{type}")
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<?> getDevicesStatusType(@PathVariable(name = "stat") String status, @PathVariable(name = "type") String type, Pageable pageable){
 		return new ResponseEntity<>(deviceService.findByStatusAndType(DeviceStatus.valueOf(status.toUpperCase()), DeviceType.valueOf(type.toUpperCase()), pageable), HttpStatus.OK);
@@ -87,6 +93,7 @@ public class DeviceController {
 			throw new EntityNotFoundException("Device not available: " + d.getStatus());
 		}
 		Employee eDb = employeeService.findById(e.getId());
+		d.setStatus(DeviceStatus.ASSIGNED);
 		d.setEmployee(eDb);
 		return new ResponseEntity<>(deviceService.updateDevice(d), HttpStatus.OK);
 	}
