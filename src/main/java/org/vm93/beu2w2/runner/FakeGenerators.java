@@ -19,18 +19,18 @@ public class FakeGenerators implements ApplicationRunner {
 	public void run(ApplicationArguments args) throws Exception {
 		
 		//Uncomment this line to make generator start on Boot
-		generateFakes();
+		//generateFakes();
 
 	}
 	
 	public void generateFakes() {
-		log.warn("FakeGeneratorStarted");
+		log.warn("*** > FakeGeneratorStarted < ***");
 		
 		for (int i = 0; i < 10; i++) {
 		employeedao.saveFakeEmployee();
 		}
 		
-		log.warn("FakeGeneratorEnded");
+		log.warn("*** > FakeGeneratorEnded < ***");
 	}
 
 }

@@ -24,7 +24,7 @@ public class EmployeeConfig {
 		Faker fake = Faker.instance(new Locale("it-IT"));
 		String nome = fake.name().firstName();
 		String cognome = fake.name().lastName();
-		String user = nome.toLowerCase().charAt(0) + "." + cognome;
+		String user = nome.toLowerCase().charAt(0) + "." + cognome.toLowerCase();
 		String email = user + "@example.com";
 		Employee e = Employee.builder().firsname(nome).lastname(cognome).email(email).username(user).build();
 		return e;
